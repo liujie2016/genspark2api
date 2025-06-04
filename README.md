@@ -21,16 +21,17 @@ _觉得有点意思的话 别忘了点个 ⭐_
 ## 功能
 
 - [x] 支持对话接口(流式/非流式)(`/chat/completions`)(请求非以下列表的模型会触发`Mixture-of-Agents`模式)
-    - **gpt-4o**
+    - **gpt-4.1**
     - **o1**
-    - **o3-mini-high**
-    - **claude-3-5-sonnet**
-    - **claude-3-7-sonnet**
+    - **o4-mini-high**
     - **claude-3-7-sonnet-thinking**
-    - **claude-3-5-haiku**
+    - **claude-3-7-sonnet**
+    - **gemini-2.5-pro**
     - **gemini-2.0-flash**
     - **deep-seek-v3**
     - **deep-seek-r1**
+    - **claude-sonnet-4-thinking**
+    - **claude-sonnet-4**
 - [x] 支持**联网搜索**,在模型名后添加`-search`即可(如:`gpt-4o-search`)
 - [x] 支持识别**图片**/**文件**多轮对话
 - [x] 支持文生图接口(`/images/generations`)
@@ -42,6 +43,8 @@ _觉得有点意思的话 别忘了点个 ⭐_
     - **recraft-v3**
     - **dall-e-3**
     - **imagen3**
+    - **imagen4**
+    - **gpt-image-1**
 - [x] 支持文/图生视频接口(`/videos/generations`),详情查看[文/图生视频请求格式](#生视频请求格式)
 - [x] 支持自定义请求头校验值(Authorization)
 - [x] 支持cookie池(随机)
