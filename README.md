@@ -16,13 +16,17 @@ _觉得有点意思的话 别忘了点个 ⭐_
 
 </div>
 
-> ⚠️目前官方强制校验`ReCaptchaV3`不通过则模型降智/生图异常,请参考[genspark-playwright-prxoy服务过V3验证](#genspark-playwright-prxoy服务过V3验证)并配置环境变量`RECAPTCHA_PROXY_URL`。
+> ⚠️目前官方强制校验`ReCaptchaV3`
+> 不通过则模型降智/生图异常,请参考[genspark-playwright-prxoy服务过V3验证](#genspark-playwright-prxoy服务过V3验证)并配置环境变量
+`RECAPTCHA_PROXY_URL`。
 
 ## 功能
 
 - [x] 支持对话接口(流式/非流式)(`/chat/completions`)(请求非以下列表的模型会触发`Mixture-of-Agents`模式)
     - **gpt-4.1**
     - **o1**
+    - **o3**,
+    - **o3-pro**,
     - **o4-mini-high**
     - **claude-3-7-sonnet-thinking**
     - **claude-3-7-sonnet**
@@ -121,7 +125,8 @@ deanxv/genspark2api
 
 其中`API_SECRET`、`GS_COOKIE`修改为自己的。
 
-如果上面的镜像无法拉取,可以尝试使用 GitHub 的 Docker 镜像,将上面的`deanxv/genspark2api`替换为`ghcr.io/deanxv/genspark2api`即可。
+如果上面的镜像无法拉取,可以尝试使用 GitHub 的 Docker 镜像,将上面的`deanxv/genspark2api`替换为
+`ghcr.io/deanxv/genspark2api`即可。
 
 ### 部署到第三方平台
 
@@ -174,16 +179,22 @@ Render 可以直接部署 docker 镜像,不需要 fork 仓库：[Render](https:/
 5. `AUTO_DEL_CHAT=0`  [可选]对话完成自动删除(默认:0)[0:关闭,1:开启]
 6. `REQUEST_RATE_LIMIT=60`  [可选]每分钟下的单ip请求速率限制,默认:60次/min
 7. `PROXY_URL=http://127.0.0.1:10801`  [可选]代理
-8. `RECAPTCHA_PROXY_URL=http://127.0.0.1:7022`  [可选]genspark-playwright-prxoy验证服务地址，仅填写域名或ip:端口即可。(示例:`RECAPTCHA_PROXY_URL=https://genspark-playwright-prxoy.com`或`RECAPTCHA_PROXY_URL=http://127.0.0.1:7022`),详情请看[genspark-playwright-prxoy服务过V3验证](#genspark-playwright-prxoy服务过V3验证)
+8. `RECAPTCHA_PROXY_URL=http://127.0.0.1:7022`  [可选]genspark-playwright-prxoy验证服务地址，仅填写域名或ip:端口即可。(
+   示例:`RECAPTCHA_PROXY_URL=https://genspark-playwright-prxoy.com`或`RECAPTCHA_PROXY_URL=http://127.0.0.1:7022`)
+   ,详情请看[genspark-playwright-prxoy服务过V3验证](#genspark-playwright-prxoy服务过V3验证)
 9. `AUTO_MODEL_CHAT_MAP_TYPE=1`  [可选]自动配置Model绑定Chat(默认:1)[0:关闭,1:开启]
-10. `MODEL_CHAT_MAP=claude-3-7-sonnet=a649******00fa,gpt-4o=su74******47hd`  [可选]Model绑定Chat(多个请以,分隔),详细请看[进阶配置](#解决模型自动切换导致降智问题)
+10. `MODEL_CHAT_MAP=claude-3-7-sonnet=a649******00fa,gpt-4o=su74******47hd`  [可选]Model绑定Chat(多个请以,分隔)
+    ,详细请看[进阶配置](#解决模型自动切换导致降智问题)
 11. `ROUTE_PREFIX=hf`  [可选]路由前缀,默认为空,添加该变量后的接口示例:`/hf/v1/chat/completions`
 12. `RATE_LIMIT_COOKIE_LOCK_DURATION=600`  [可选]到达速率限制的cookie禁用时间,默认为600s
 13. `REASONING_HIDE=0`  [可选]**隐藏**推理过程(默认:0)[0:关闭,1:开启]
 
-~~14.`SESSION_IMAGE_CHAT_MAP=aed9196b-********-4ed6e32f7e4d=0c6785e6-********-7ff6e5a2a29c,aefwer6b-********-casds22=fda234-********-sfaw123`  [可选]Session绑定Image-Chat(多个请以,分隔),详细请看[进阶配置](#生图模型配置)~~
+~~14.
+`SESSION_IMAGE_CHAT_MAP=aed9196b-********-4ed6e32f7e4d=0c6785e6-********-7ff6e5a2a29c,aefwer6b-********-casds22=fda234-********-sfaw123`  [可选]
+Session绑定Image-Chat(多个请以,分隔),详细请看[进阶配置](#生图模型配置)~~
 
-~~15. `YES_CAPTCHA_CLIENT_KEY=******`  [可选]YesCaptcha Client Key 过谷歌验证,详细请看[使用YesCaptcha过谷歌验证](#使用YesCaptcha过谷歌验证)~~
+~~15. `YES_CAPTCHA_CLIENT_KEY=******`  [可选]YesCaptcha Client Key
+过谷歌验证,详细请看[使用YesCaptcha过谷歌验证](#使用YesCaptcha过谷歌验证)~~
 
 ### cookie获取方式
 
@@ -251,12 +262,12 @@ services:
       - PROXY_URL=http://account:pwd@ip:port #  [可选] 推荐(住宅)动态代理,配置代理后过验证概率更高,但响应会变慢。
 ```
 
-2. 部署后配置`genspark2api`环境变量`RECAPTCHA_PROXY_URL`，仅填写域名或ip:端口即可。(示例:`RECAPTCHA_PROXY_URL=https://genspark-playwright-prxoy.com`或`RECAPTCHA_PROXY_URL=http://127.0.0.1:7022`)
+2. 部署后配置`genspark2api`环境变量`RECAPTCHA_PROXY_URL`，仅填写域名或ip:端口即可。(示例:
+   `RECAPTCHA_PROXY_URL=https://genspark-playwright-prxoy.com`或`RECAPTCHA_PROXY_URL=http://127.0.0.1:7022`)
 
 3. 重启`genspark2api`服务。
 
 #### 接入自定义Recaptcha服务
-
 
 ###### 接口：获取令牌
 
@@ -270,9 +281,9 @@ services:
 
 ###### 请求头
 
-| 参数名 | 必选 | 类型 | 说明 |
-|-------|------|------|------|
-| cookie | 是 | string | 用户会话凭证 |
+| 参数名    | 必选 | 类型     | 说明     |
+|--------|----|--------|--------|
+| cookie | 是  | string | 用户会话凭证 |
 
 ###### 响应参数
 
@@ -285,8 +296,6 @@ services:
 }
 ```
 
-
-
 ## 报错排查
 
 > `Detected Cloudflare Challenge Page`
@@ -294,7 +303,8 @@ services:
 
 被Cloudflare拦截出5s盾,可配置`PROXY_URL`。
 
-(【推荐方案】[自建ipv6代理池绕过cf对ip的速率限制及5s盾](https://linux.do/t/topic/367413)或购买[IProyal](https://iproyal.cn/?r=244330))
+(【推荐方案】[自建ipv6代理池绕过cf对ip的速率限制及5s盾](https://linux.do/t/topic/367413)
+或购买[IProyal](https://iproyal.cn/?r=244330))
 
 > `Genspark Service Unavailable`
 >
@@ -334,7 +344,7 @@ Genspark官方服务不可用,请稍后再试。
   "created": 1677664796,
   "data": [
     {
-      "url": "https://example.com/video.mp4",
+      "url": "https://example.com/video.mp4"
     }
   ]
 }
