@@ -30,6 +30,7 @@ var DefaultOpenaiModelList = []string{
 	"imagen3",
 	"imagen4",
 	"gpt-image-1",
+	"flux-pro/kontext/pro",
 }
 
 var TextModelList = []string{
@@ -65,6 +66,7 @@ var ImageModelList = []string{
 	"imagen3",
 	"imagen4",
 	"gpt-image-1",
+	"flux-pro/kontext/pro",
 }
 
 var VideoModelList = []string{
